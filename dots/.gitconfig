@@ -1,0 +1,9 @@
+// add git-alias
+[alias]
+  co = !git branch -a | fzf | xargs git checkout
+  cob = checkout -b
+  brd = branch -d
+  brdd = branch -D
+  com = commit
+  comm = commit -m 
+  cp = cherry-pick

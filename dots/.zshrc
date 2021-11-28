@@ -1,0 +1,1 @@
+/Users/owaki-kengo/.zprezto/runcoms/zshrc
