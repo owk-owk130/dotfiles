@@ -1,1 +1,0 @@
-/Users/owaki-kengo/.zprezto/runcoms/zshenv
