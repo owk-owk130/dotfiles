@@ -14,6 +14,9 @@ https://support.apple.com/ja-jp/guide/mac-help/mchlp1011/mac
 ### 左下でスクリーンセーバー
 `デスクトップとスクリーンセーバー > ホットコーナー`
 
+### 同じアプリケーションのウィンドウを切り替える
+`option + tab`にする
+
 ## 新しく設定するもの
 ### Homebrewのインストール
 https://brew.sh/index_ja
