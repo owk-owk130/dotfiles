@@ -16,6 +16,7 @@ https://support.apple.com/ja-jp/guide/mac-help/mchlp1011/mac
 
 ### 同じアプリケーションのウィンドウを切り替える
 `option + tab`にする
+https://dev.classmethod.jp/articles/mac-next-window-shortcut/
 
 ## 新しく設定するもの
 ### Homebrewのインストール
