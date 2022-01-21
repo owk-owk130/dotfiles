@@ -2,7 +2,13 @@
 [alias]
 	co = !git checkout $(git branch | fzy)
 	cob = checkout -b
+	mg = merge
+	pl = pull
+	rv = revert
+	cp = cherry-pick
+	l = log
 [pull]
 	ff = only
 [user]
 	email = owakikengo@gmail.com
+	name = owk-owk130
