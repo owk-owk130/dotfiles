@@ -1,6 +1,9 @@
 ## nodenv
 eval "$(nodenv init -)"
 
+## pyenv
+eval "$(pyenv init -)"
+
 # git
 autoload -Uz vcs_info
 setopt prompt_subst
@@ -28,3 +31,5 @@ if ! zplug check --verbose; then
 fi
  
 zplug load
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
