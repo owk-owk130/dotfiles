@@ -35,6 +35,7 @@ nodenv grobal ${nodeVersion}
 
 ### zshのカスタマイズ
 zplugがcurlでいれないとだめかもしれない
+https://github.com/zplug/zplug#the-best-way
 source ~/.zshrcで再起動
 
 ### vscode設定
@@ -51,5 +52,11 @@ source ~/.zshrcで再起動
 - フルスクリーン
 https://qiita.com/ruwatana/items/8d9c174250061721ad11
 
-### alfredの設定
-...追記
+### Raycastの設定
+- Command Spaceで開くようにする
+- 設定はお好みで
+
+### XCodeをいれる
+https://qiita.com/naginx/items/0d560c460235f1ab2282
+
+### パスワード・タッチID
