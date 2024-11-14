@@ -56,7 +56,21 @@ https://qiita.com/ruwatana/items/8d9c174250061721ad11
 - Command Spaceで開くようにする
 - 設定はお好みで
 
-### XCodeをいれる
-https://qiita.com/naginx/items/0d560c460235f1ab2282
+### Appstore
+- XCode
+  - https://qiita.com/naginx/items/0d560c460235f1ab2282
+- Logic
+- MeetingBar
+- Apple Developer
+- TestFlight
+- Adobe CC
 
+## Logic関連
+- kirohearts
+  - https://kilohearts.com/
+- positive grid
+  - https://member.positivegrid.com/
 ### パスワード・タッチID
+- 設定する
+### gitと1passwordの設定
+- https://qiita.com/tonnsama/items/d4c52983e1930d2ec8a8
