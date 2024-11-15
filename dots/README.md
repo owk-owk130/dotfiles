@@ -65,11 +65,24 @@ https://qiita.com/ruwatana/items/8d9c174250061721ad11
 - TestFlight
 - Adobe CC
 
+## Flutter
+- Flutterのインストール
+  - https://zenn.dev/kboy/books/ca6a9c93fd23f3/viewer/5232dc
+  - fvmの設定はbrewとzshrcで済み
+- Android Studio
+  - [Android Studio](https://developer.android.com/studio?hl=ja)
+- java
+  - https://zenn.dev/satokazur222/articles/66568417b291d8
+- flutter doctorで出たエラーに従って修正していく
+
 ## Logic関連
 - kirohearts
   - https://kilohearts.com/
 - positive grid
   - https://member.positivegrid.com/
+- scaler2
+  - https://www.pluginboutique.com/
+
 ### パスワード・タッチID
 - 設定する
 ### gitと1passwordの設定
