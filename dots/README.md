@@ -20,10 +20,7 @@ https://dev.classmethod.jp/articles/mac-next-window-shortcut/
 
 ## 新しく設定するもの
 ### Homebrewのインストール
-https://brew.sh/index_ja
-
-少しハマった
-https://dkssksk.com/machomebrew/
+[https://brew.sh/index_ja](https://brew.sh/ja/)
 
 `brew bundle` でBrewfileの中身がインストールされる
 
