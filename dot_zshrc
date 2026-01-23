@@ -1,0 +1,82 @@
+setopt +o nomatch
+
+# mise (ランタイム管理)
+eval "$(mise activate zsh)"
+
+# git
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{magenta}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{yellow}+"
+zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+
+# プロンプトカスタマイズ
+PROMPT='
+[%B%F{red}%n@%m%f%b:%F{green}%~%f]%F{cyan}$vcs_info_msg_0_%f
+%F{yellow}$%f '
+
+#zplug
+#zplug
+source ~/.zplug/init.zsh
+
+# 対話的シェルでのみ enhancd を有効化
+if [[ $- == *i* ]]; then
+  zplug "b4b4r07/enhancd", use:"init.sh"
+fi
+
+if ! zplug check --verbose; then
+    printf "インストールしますか？[y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
+
+
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+export PATH="$PATH:/Users/owaki-kengo/flutter/bin"
+alias flutter="fvm flutter"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/owaki-kengo/.dart-cli-completion/zsh-config.zsh ]] && . /Users/owaki-kengo/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+export PATH="$PATH:$HOME/fvm/default/bin"
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/Users/owaki-kengo/.bun/_bun" ] && source "/Users/owaki-kengo/.bun/_bun"
+
+
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
+export NDK_HOME=$HOME/Library/Android/sdk/ndk/29.0.13599879
+
+. "$HOME/.local/bin/env"
+export PATH="$HOME/.local/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/Documents/projects/aiss-house-poc/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/owaki-kengo/.antigravity/antigravity/bin:$PATH"
+
+# Carapace補完
+export CARAPACE_BRIDGES="zsh,fish,bash,inshellisense"
+zstyle ":completion:*" format $"\e[2;37mCompleting %d\e[m"
+source <(carapace _carapace)
