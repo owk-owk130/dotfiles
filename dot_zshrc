@@ -1,5 +1,8 @@
 setopt +o nomatch
 
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # mise (ランタイム管理)
 eval "$(mise activate zsh)"
 
