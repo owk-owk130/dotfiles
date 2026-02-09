@@ -1,22 +1,21 @@
 # Sheldon plugins configuration
-# 現在のzplugプラグインをSheldonに移行
+
+shell = "zsh"
+apply = ["source"]
 
 [plugins.enhancd]
 github = "b4b4r07/enhancd"
 use = ["init.sh"]
 
-# 補完機能強化
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
+apply = ["fpath"]
 
-# シンタックスハイライト
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
 
-# 履歴検索
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
 
-# 自動提案
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
