@@ -64,5 +64,17 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754183942526
   },
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/sync-skills.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
