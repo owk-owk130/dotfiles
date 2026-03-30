@@ -17,6 +17,8 @@ dotfile は chezmoi で管理されている。ターゲットファイルを直
 
 ## ワークフロー
 
+### 既存ファイルの編集
+
 1. **ソースパスを特定する**
    ```bash
    chezmoi source-path <target-path>
@@ -29,6 +31,20 @@ dotfile は chezmoi で管理されている。ターゲットファイルを直
    ```bash
    chezmoi apply <target-path>
    ```
+
+### 新規ファイル・ディレクトリの追加
+
+1. **chezmoi add で管理対象に追加する**
+   ```bash
+   chezmoi add <target-path>
+   ```
+
+2. **反映する**（add 後は必ず apply を実行）
+   ```bash
+   chezmoi apply <target-path>
+   ```
+
+**重要**: `chezmoi add` だけではターゲットに反映されない。必ず `chezmoi apply` もセットで実行すること。
 
 ## chezmoi のファイル命名規則
 
