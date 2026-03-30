@@ -1,5 +1,5 @@
 
-font-family = "Hiragino Sans"
+font-family = Menlo
 
 theme = Monokai Pro Octagon
 
@@ -10,8 +10,10 @@ window-theme = ghostty
 
 background-opacity = 0.85
 background-blur-radius = 20
+# custom-shader = ~/.config/ghostty/passthrough.glsl
 
 copy-on-select = true
+cursor-click-to-move = false
 clipboard-read = allow
 clipboard-write = allow
 clipboard-trim-trailing-spaces = true
