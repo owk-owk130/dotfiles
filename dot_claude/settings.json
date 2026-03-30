@@ -64,6 +64,7 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754183942526
   },
+  "autoMemoryEnabled": false,
   "effortLevel": "high",
   "hooks": {
     "SessionEnd": [
