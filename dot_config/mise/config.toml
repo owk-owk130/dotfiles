@@ -22,3 +22,4 @@ url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/wind
 node = "24.1.0"
 java = "17.0.2"
 python = "3.12"
+go = "1.26"
