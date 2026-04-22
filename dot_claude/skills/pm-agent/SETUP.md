@@ -1,7 +1,6 @@
-# セットアップ・運用リファレンス
+# 運用リファレンス
 
-セットアップのワークフローは SKILL.md（フェーズ 3B）、フィールド作成・ビュー作成の GraphQL は `GRAPHQL.md` を参照。
-このファイルはデフォルト設定、スクリプト詳細、レアケース操作、トラブルシューティングのリファレンス。
+このファイルはデフォルト設定、スクリプト詳細、レアケース操作（Iteration 継承/分散配置、チェックポイント）、トラブルシューティングを扱う補助ドキュメント。
 
 ## デフォルト設定
 
@@ -56,8 +55,6 @@ gh auth refresh -s project
 | `pm-cascade-iteration.sh` | 親→子への Iteration 自動継承（`--recursive` 対応） | - |
 | `pm-distribute-iterations.sh` | 子 Issue を複数 Iteration に分散配置 | - |
 
-> **注**: メインの Issue 作成ワークフロー（議事録 → Issue 化）は `SKILL.md` のステップ 3A.4「統合ワークフロー例」を参照。本ファイルでは、レアケース向け（Iteration 操作、チェックポイント機能、トラブルシューティング等）のみ扱う。
-
 ## レアケース操作例
 
 ### Iteration 継承（親→子）
@@ -66,11 +63,11 @@ gh auth refresh -s project
 
 ```bash
 # 直接の子のみ
-${CLAUDE_SKILL_DIR}/scripts/pm-cascade-iteration.sh 10 \
+scripts/pm-cascade-iteration.sh 10 \
   --project 1 --owner @me
 
 # 全子孫に再帰的に適用（Epic → Feature → Story → Task）
-${CLAUDE_SKILL_DIR}/scripts/pm-cascade-iteration.sh 10 \
+scripts/pm-cascade-iteration.sh 10 \
   --project 1 --owner @me --recursive
 ```
 
@@ -82,16 +79,16 @@ ${CLAUDE_SKILL_DIR}/scripts/pm-cascade-iteration.sh 10 \
 
 ```bash
 # 子 Issue 一覧を確認
-${CLAUDE_SKILL_DIR}/scripts/pm-distribute-iterations.sh 10 \
+scripts/pm-distribute-iterations.sh 10 \
   --project 1 --owner @me --list
 
 # 3 つのスプリントに分散配置
-${CLAUDE_SKILL_DIR}/scripts/pm-distribute-iterations.sh 10 \
+scripts/pm-distribute-iterations.sh 10 \
   --project 1 --owner @me \
   --iterations "Sprint 1,Sprint 2,Sprint 3"
 
 # カスタム順序で配置 + 子孫にも cascade
-${CLAUDE_SKILL_DIR}/scripts/pm-distribute-iterations.sh 10 \
+scripts/pm-distribute-iterations.sh 10 \
   --project 1 --owner @me \
   --iterations "Sprint 1,Sprint 2,Sprint 3" \
   --order "15,12,18,14,16,13" \
@@ -109,7 +106,7 @@ ${CLAUDE_SKILL_DIR}/scripts/pm-distribute-iterations.sh 10 \
 /tmp/claude/pm-checkpoint.json
 
 # カスタムチェックポイント
-${CLAUDE_SKILL_DIR}/scripts/pm-bulk-issues.sh issues.json \
+scripts/pm-bulk-issues.sh issues.json \
   --checkpoint /tmp/claude/my-checkpoint.json
 ```
 
@@ -140,6 +137,6 @@ ${CLAUDE_SKILL_DIR}/scripts/pm-bulk-issues.sh issues.json \
 gh project view PROJECT_NUMBER --owner @me
 
 # フィールド一覧
-${CLAUDE_SKILL_DIR}/scripts/pm-project-fields.sh \
+scripts/pm-project-fields.sh \
   --project 1 --owner @me --list-fields
 ```
