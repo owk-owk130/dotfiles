@@ -55,13 +55,20 @@ gh pr create --base "$BASE_BRANCH"
 
 ### 6. Copilot レビューの待機と適用
 
-PR 作成後、Copilot の自動レビューが届くまで待ち、妥当な指摘は適用する。
+Rulesets で自動追加されていないリポジトリでも Copilot レビューを発火できるよう、明示的にレビュアーに追加する。
+
+```bash
+PR_NUMBER=$(gh pr view --json number -q .number)
+gh pr edit "$PR_NUMBER" --add-reviewer Copilot 2>/dev/null || echo "Copilot を追加できませんでした（未サポートのリポジトリの可能性）"
+```
+
+失敗しても無視して続行する（後続の skill 側で未サポートを検知して即終了する）。
 
 ```
 /loop /copilot-review-apply
 ```
 
-interval なしの dynamic mode で起動すると、`copilot-review-apply` skill が最大 5 分までポーリングし、レビューが届いた時点で処理に入る。
+interval なしの dynamic mode で起動すると、`copilot-review-apply` skill が最大 5 分までポーリングし、レビューが届いた時点で処理に入る。Copilot レビューが発火しないリポジトリでは skill 側で検知して待機せず終了する。
 
 ## PR テンプレート
 

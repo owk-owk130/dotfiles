@@ -37,7 +37,19 @@ gh api "repos/{owner}/{repo}/pulls/{n}/comments" --paginate
 
 Copilot の投稿者名は `Copilot` または `copilot-pull-request-reviewer[bot]`。`user.login` で両方にマッチさせる。
 
-### 3. 未到達時の待機ループ
+### 3. Copilot 未サポートの早期終了
+
+既に Copilot の review / comments が 1 件以上あれば通常の処理に進む。1 件もない場合は、PR に Copilot がレビュアーとしてリクエストされているかを確認する。
+
+```bash
+gh pr view "$PR_NUMBER" --json reviewRequests \
+  | jq -e '.reviewRequests[] | (.login // "") | ascii_downcase | select(contains("copilot"))' \
+  > /dev/null
+```
+
+ヒットしなければ「このリポジトリでは Copilot レビューが発火していない」と判断し、待機ループに入らずに即終了する。ユーザーには「Copilot レビュー未発火のため処理対象なし」と報告する。
+
+### 4. 未到達時の待機ループ
 
 Copilot の review が 1 件も見つからない場合：
 
@@ -47,7 +59,7 @@ Copilot の review が 1 件も見つからない場合：
 
 dynamic mode 外で呼ばれている場合は `ScheduleWakeup` が使えないため、その旨を報告して終了する。
 
-### 4. 二重適用の防止
+### 5. 二重適用の防止
 
 取得した各インラインコメントについて、既に返信スレッドがぶら下がっているものはスキップする。
 
@@ -59,7 +71,7 @@ gh api "repos/{owner}/{repo}/pulls/{n}/comments" --paginate \
 
 自分（bot ではないユーザー）の返信が既についているコメントは処理済みとみなす。
 
-### 5. 妥当性の判定
+### 6. 妥当性の判定
 
 未処理のコメントを Claude が読んで判定する。判定前に必ず該当ファイルを `Read` で確認する（`diff_hunk` だけで判断しない）。
 
@@ -74,13 +86,13 @@ gh api "repos/{owner}/{repo}/pulls/{n}/comments" --paginate \
   - 前提を誤解している指摘（周辺コンテキストを読めば不要とわかるもの）
   - YAGNI 原則に反する追加提案
 
-### 6. 妥当なコメントの修正適用
+### 7. 妥当なコメントの修正適用
 
 `Edit` で該当箇所を修正する。複数コメントが同じファイルに及ぶ場合はまとめて適用する。
 
 修正後は CLAUDE.md のグローバルルールに従い、必要なら `test` / `lint` / `format` を実行して確認する。
 
-### 7. 棄却コメントへの返信
+### 8. 棄却コメントへの返信
 
 棄却した各コメントには、見送り理由を添えて返信スレッドを立てる。
 
@@ -91,7 +103,7 @@ gh api -X POST "repos/{owner}/{repo}/pulls/{n}/comments/{comment_id}/replies" \
 
 返信文は 1〜2 文で簡潔に、理由を具体的に書く（例：「既存の○○モジュールと整合させるため現状維持」「YAGNI のため追加実装は見送り」）。
 
-### 8. 結果サマリの提示
+### 9. 結果サマリの提示
 
 ユーザーに以下を報告する：
 
