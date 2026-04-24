@@ -9,11 +9,18 @@ description: "現在のブランチからプルリクエストを作成する。
 
 ## 手順
 
+### 0. ベースブランチの特定
+
+```bash
+# リモートのデフォルトブランチ（HEAD が指すブランチ）を取得
+BASE_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+```
+
 ### 1. ベースブランチを最新化
 
 ```bash
-git fetch origin develop
-git rebase origin/develop
+git fetch origin "$BASE_BRANCH"
+git rebase "origin/$BASE_BRANCH"
 ```
 
 ※ コンフリクトがあれば解決してから続行
@@ -22,8 +29,8 @@ git rebase origin/develop
 
 ```bash
 git status
-git log origin/develop..HEAD --oneline
-git diff origin/develop...HEAD
+git log "origin/$BASE_BRANCH..HEAD" --oneline
+git diff "origin/$BASE_BRANCH...HEAD"
 ```
 
 ### 3. ドキュメントの更新
@@ -43,8 +50,18 @@ git push --force-with-lease
 ### 5. PR作成
 
 ```bash
-gh pr create --base develop
+gh pr create --base "$BASE_BRANCH"
 ```
+
+### 6. Copilot レビューの待機と適用
+
+PR 作成後、Copilot の自動レビューが届くまで待ち、妥当な指摘は適用する。
+
+```
+/loop /copilot-review-apply
+```
+
+interval なしの dynamic mode で起動すると、`copilot-review-apply` skill が最大 5 分までポーリングし、レビューが届いた時点で処理に入る。
 
 ## PR テンプレート
 
@@ -63,5 +80,5 @@ gh pr create --base develop
 ## 注意事項
 
 - タイトルは変更内容を簡潔に表現する（70文字以内）
-- ベースブランチはプロジェクトに応じて変更（develop / main）
+- ベースブランチはリモートのデフォルトブランチ（HEAD が指すブランチ）を自動検出する
 - PR 説明文に「Generated with Claude Code」は入れない
