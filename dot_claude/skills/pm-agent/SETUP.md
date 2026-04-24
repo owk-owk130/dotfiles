@@ -38,6 +38,29 @@ gh auth refresh -s project
 
 必要なスコープ: `repo`（Issue 作成・編集）、`project`（Projects 操作）
 
+## 初回 Project セットアップ
+
+pm-agent は Projects V2 に以下のフィールドが揃っている前提で動作する。初回利用時に Project オーナー権限で設定する（organization admin 権限は不要）。
+
+### 必須フィールド
+
+| フィールド | 型 | オプション値 | GitHub template 対応 |
+|-----------|-----|-----------|---------------------|
+| `Status` | SINGLE_SELECT | Todo / In Progress / Done | デフォルト存在 |
+| `Priority` | SINGLE_SELECT | **High / Medium / Low** | template は `P0 / P1 / P2`。要リネーム |
+| `Estimate` | NUMBER | - | Team planning template に存在 |
+| `Iteration` | ITERATION | - | Team planning template に存在 |
+| `Ticket Type` | SINGLE_SELECT | Epic / Feature / Story / Task / Bug | **手動作成必須**（GitHub built-in `Type` は organization admin 権限が必要なため不採用） |
+
+### セットアップ手順
+
+1. GitHub Projects V2 を Team planning または Feature release テンプレートで作成
+2. `Priority` のオプション値を `P0/P1/P2` → `High/Medium/Low` にリネーム
+3. `Ticket Type` を手動追加（SINGLE_SELECT、オプション: Epic / Feature / Story / Task / Bug）
+4. 検証: `scripts/pm-project-fields.sh --list-fields --project N --owner login`
+
+各フィールド作成の GraphQL は `GRAPHQL.md` 参照。
+
 ## スクリプト一覧
 
 | スクリプト | 用途 | 必須 |
