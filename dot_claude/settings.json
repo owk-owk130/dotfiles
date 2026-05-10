@@ -4,13 +4,14 @@
     "ENABLE_TOOL_SEARCH": "true"
   },
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(bun run lint)",
       "Bash(bun run test:*)",
       "Bash(bun run format:*)",
-      "Bash(cd :*)",
-      "Bash(mkdir :*)",
-      "Bash(ls :*)",
+      "Bash(cd:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
       "Bash(pwd)",
       "Bash(bun create :*)",
       "Bash(bun install :*)",
@@ -18,13 +19,15 @@
       "WebFetch(*)",
       "WebSearch(*)",
       "Bash(git:*)",
-      "Bash(gh :*)",
-      "Bash(curl :*)",
-      "Bash(find :*)",
-      "Bash(cat :*)",
-      "Bash(head :*)",
-      "Bash(tail :*)",
-      "Bash(echo :*)",
+      "Bash(gh:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(echo:*)",
+      "Bash(npx:*)",
       "MCP(read_file:*)",
       "MCP(write_file:*)",
       "MCP(replace_regex:*)",
@@ -49,10 +52,40 @@
       "Read(/proc/*/environ)"
     ]
   },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/sync-skills.sh"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "javascript-typescript@claude-code-workflows": true,
-    "pr-review-toolkit@claude-code-plugins": true
+    "pr-review-toolkit@claude-code-plugins": true,
+    "chrome-devtools-mcp@chrome-devtools-plugins": true
   },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "chrome-devtools-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "ChromeDevTools/chrome-devtools-mcp"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true,
   "mcp": {
     "autoAcceptOperations": [
       "read_file",
@@ -70,18 +103,5 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754183942526
   },
-  "autoMemoryEnabled": false,
-  "effortLevel": "high",
-  "hooks": {
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/hooks/sync-skills.sh"
-          }
-        ]
-      }
-    ]
-  }
+  "autoUpdatesChannel": "latest"
 }
