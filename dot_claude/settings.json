@@ -4,7 +4,7 @@
     "ENABLE_TOOL_SEARCH": "true"
   },
   "permissions": {
-    "defaultMode": "acceptEdits",
+    "defaultMode": "auto",
     "allow": [
       "Bash(bun run lint)",
       "Bash(bun run test:*)",
