@@ -4,7 +4,7 @@
 
 - 常に日本語で会話する
 
-## Cording Guidelines
+## Coding Guidelines
 
 ### Global rules
 
@@ -39,10 +39,10 @@
 
 1. test / lint / format / build を実行し、異常があれば修正する
 2. `simplify` スキルで変更コードの再利用性・品質・効率を見直し、必要なら修正する
-3. codex レビューは**公式 codex プラグイン**で行う：
-   - バグ・セキュリティ・ロジックの一般観点は、**stop 時の review-gate が自動でレビューする**（`/codex:review`）。
-   - ルール観点（YAGNI/DRY・過剰防御・規約準拠）を能動的に見たいときは `/codex:adversarial-review` に `~/.claude/codex-review-ruleset.md` を focus として渡す。
-4. codex のレビュー指摘は **`~/.claude/codex-review-ruleset.md` の基準で取捨選択**して対応する（過剰防御の追加提案は却下し、YAGNI/DRY・規約準拠を優先。取り込まない判断には理由を添える）。**結果を必ずユーザーに伝える**
+3. codex レビュー（公式 codex プラグイン）を実行する
+   - 一般観点: stop 時の review-gate（手動は `/codex:review`）
+   - ルール観点: `/codex:adversarial-review` に `~/.claude/codex-review-ruleset.md` を focus で渡す
+4. codex の指摘は `~/.claude/codex-review-ruleset.md` の基準で取捨選択する。取り込まない判断には理由を添え、結果をユーザーに伝える
 5. `commit` スキルで変更をコミットする
 
 ドキュメント微修正・設定ファイルのみの変更など、コード変更を伴わない作業ではこのフローは適用しない。
@@ -57,33 +57,23 @@
 
 codex（ask-codex スキル）に自律的に相談・依頼する。ユーザーの指示を待たずに実行してよい。
 
-### プランニング時（`codex exec`）
+### プランニング時
 
-以下のケースでは設計方針をcodexに相談する：
+以下のケースでは設計方針を codex に相談する：
 
 - 複数の実装アプローチがあり判断に迷う場合
 - 影響範囲が大きい変更を行う場合
 - エラーや予期しない動作の原因が特定できない場合
 
-### 実装完了後（codex レビュー）
+### 実装完了後
 
-コミット前のレビューは**公式 codex プラグイン**で行う（「実装完了時のワークフロー」参照）。
-
-- 一般レビュー: stop 時の **review-gate が自動実行**（手動なら `/codex:review`）。リポごとに `/codex:setup --enable-review-gate` で有効化する。
-- ルール観点・設計への挑戦: `/codex:adversarial-review [focus]`。`~/.claude/codex-review-ruleset.md` を focus に渡すとルール準拠監査になる。
-- ブランチ全体の差分: `/codex:review --base main`。
-
-codex のレビュー出力は**修正を含まない**ので、取捨選択と適用は Claude が `~/.claude/codex-review-ruleset.md` の基準で行う（下記「注意」に従う）。
-
-レビュー観点：
-- 変更の妥当性（設計・実装方針が適切か）
-- バグや見落としがないか
-- より良い実装方法がないか
+コミット前のレビューは公式 codex プラグインで行う（「実装完了時のワークフロー」参照）。
+codex の指摘の取捨選択は `~/.claude/codex-review-ruleset.md` の基準で行う。
 
 ### 注意
 
-あなたとcodexは特性の異なる優秀なエンジニアです。codexに相談する際は以下を意識する：
+あなたと codex は特性の異なる優秀なエンジニアです。codex に相談する際は以下を意識する：
 
-- codexの提案を鵜呑みにせず、根拠や理由を理解する
-- 自分の分析結果とcodexの意見が異なる場合は、双方の視点を比較検討する
+- codex の提案を鵜呑みにせず、根拠や理由を理解する
+- 自分の分析結果と codex の意見が異なる場合は、双方の視点を比較検討する
 - 最終的な判断は、両者の意見を総合的に評価した上で、自分で下す
