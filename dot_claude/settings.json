@@ -4,7 +4,6 @@
     "ENABLE_TOOL_SEARCH": "true"
   },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
       "Bash(bun run lint)",
       "Bash(bun run test:*)",
@@ -50,7 +49,8 @@
       "Read(/etc/passwd)",
       "Read(/etc/shadow)",
       "Read(/proc/*/environ)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "hooks": {
     "SessionEnd": [
@@ -67,7 +67,9 @@
   "enabledPlugins": {
     "javascript-typescript@claude-code-workflows": true,
     "pr-review-toolkit@claude-code-plugins": true,
-    "chrome-devtools-mcp@chrome-devtools-plugins": true
+    "chrome-devtools-mcp@chrome-devtools-plugins": true,
+    "figma@claude-plugins-official": true,
+    "codex@openai-codex": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -83,9 +85,12 @@
       }
     }
   },
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
+  "autoUpdatesChannel": "latest",
+  "skipWorkflowUsageWarning": true,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
   "mcp": {
     "autoAcceptOperations": [
       "read_file",
@@ -103,5 +108,5 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754183942526
   },
-  "autoUpdatesChannel": "latest"
+  "model": "claude-opus-4-6"
 }

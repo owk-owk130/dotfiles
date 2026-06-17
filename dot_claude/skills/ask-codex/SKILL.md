@@ -10,6 +10,8 @@ Executes the local `codex` CLI to get coding assistance.
 
 **Note:** This skill requires the `codex` CLI to be installed and available in your system's PATH.
 
+> **レビューは公式 codex プラグインを優先**：コミット前レビューは `/codex:review`（stop 時の review-gate で自動）／`/codex:adversarial-review`（ルール観点は `~/.claude/codex-review-ruleset.md` を focus に渡す）を使う。`ask-codex` は主に **`codex exec`（設計相談・タスク委譲）** 用途で使う。
+
 ## Args routing
 
 スキル呼び出し時の args に応じてサブコマンドを選択する：
